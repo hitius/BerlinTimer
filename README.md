@@ -1,5 +1,7 @@
 # BerlinTimer Project
 
+This is a Quarkus Framework project.
+
 This is a simple API for BerlinClock Algorithm
 
 Base API URL: http://localhost:8080/api/
