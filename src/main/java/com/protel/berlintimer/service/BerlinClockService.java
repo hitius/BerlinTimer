@@ -25,17 +25,24 @@ public class BerlinClockService {
 	 * @return
 	 */
 	public String calculationsForBerlinClock(String time) {
-		BerlinClock result = null;
+		String resultString = "";
 		
 		// parsing time 
-		Date timeAsDate = parseTime(time);
+		Date timeAsDate = null;
+		if ( time == null ) {
+			timeAsDate = new Date();
+		} else {
+			timeAsDate = parseTime(time);				
+		}
 		
 		if (timeAsDate != null) {
 			// formatting time to light color format
-			result = formatTimeToLightString(timeAsDate);
+			resultString = formatTimeToLightString(timeAsDate).toString();
+		} else {
+			resultString = "Wrong Data format! Please try HH:mm:ss";
 		}
 		
-		return result.toString();
+		return resultString;
 	}
 
 	/**
@@ -70,7 +77,7 @@ public class BerlinClockService {
 		}
 		for (int i=0;i<minuteFiveMinutesRow;i++) {
 			
-			if (minuteFiveMinutesRow % 3 == 0) {
+			if (i == 2 || i == 5 || i== 8) {
 				minuteString += RED.getValue();
 			} else {
 				minuteString += YELLOW.getValue();
@@ -79,7 +86,7 @@ public class BerlinClockService {
 		}
 		
 		berlinClock.setFiveMinutesRow(minuteString + OFF.getValue().repeat(11 - minuteFiveMinutesRow));
-		berlinClock.setSingleMinutesRow(RED.getValue().repeat(minuteSingleMinuteRow) + OFF.getValue().repeat(4 - minuteSingleMinuteRow));
+		berlinClock.setSingleMinutesRow(YELLOW.getValue().repeat(minuteSingleMinuteRow) + OFF.getValue().repeat(4 - minuteSingleMinuteRow));
 		
 		
 		return berlinClock;
