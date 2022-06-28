@@ -1,9 +1,16 @@
 package com.protel.berlintimer.service;
 
+import static com.protel.berlintimer.enums.BerlinClockLightEnum.OFF;
+import static com.protel.berlintimer.enums.BerlinClockLightEnum.RED;
+import static com.protel.berlintimer.enums.BerlinClockLightEnum.YELLOW;
+
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
+
+import com.protel.berlintimer.BerlinClock;
 
 @ApplicationScoped
 public class BerlinClockService {
@@ -18,7 +25,7 @@ public class BerlinClockService {
 	 * @return
 	 */
 	public String calculationsForBerlinClock(String time) {
-		String result = null;
+		BerlinClock result = null;
 		
 		// parsing time 
 		Date timeAsDate = parseTime(time);
@@ -26,12 +33,9 @@ public class BerlinClockService {
 		if (timeAsDate != null) {
 			// formatting time to light color format
 			result = formatTimeToLightString(timeAsDate);
-		} else {
-			// TODO: typo
-			result = "Wrong format";
 		}
 		
-		return result;
+		return result.toString();
 	}
 
 	/**
@@ -39,11 +43,46 @@ public class BerlinClockService {
 	 * @param timeAsDate
 	 * @return
 	 */
-	private String formatTimeToLightString(Date timeAsDate) {
+	private BerlinClock formatTimeToLightString(Date timeAsDate) {
+		BerlinClock berlinClock = new BerlinClock();
+		
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(timeAsDate);
+		// getting time values
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		
+		int hourFiveHoursRow = hour / 5;
+		int hourSingleHourRow = hour % 5;
+		int minuteFiveMinutesRow = minute / 5;
+		int minuteSingleMinuteRow = minute % 5;
+		
+		// calculation second
+		berlinClock.setSecond((second % 2 == 0) ? YELLOW.getValue() : OFF.getValue()); 
+		// calculation hour rows
+		berlinClock.setFiveHoursRow(RED.getValue().repeat(hourFiveHoursRow) + OFF.getValue().repeat(4 - hourFiveHoursRow));
+		berlinClock.setOneFullHourRow(RED.getValue().repeat(hourSingleHourRow) + OFF.getValue().repeat(4 - hourSingleHourRow));
+		//calculation minute rows
+		String minuteString = "";
+		if (minuteFiveMinutesRow == 0) {
+			minuteString = OFF.getValue().repeat(11);
+		}
+		for (int i=0;i<minuteFiveMinutesRow;i++) {
+			
+			if (minuteFiveMinutesRow % 3 == 0) {
+				minuteString += RED.getValue();
+			} else {
+				minuteString += YELLOW.getValue();
+			}
+			
+		}
+		
+		berlinClock.setFiveMinutesRow(minuteString + OFF.getValue().repeat(11 - minuteFiveMinutesRow));
+		berlinClock.setSingleMinutesRow(RED.getValue().repeat(minuteSingleMinuteRow) + OFF.getValue().repeat(4 - minuteSingleMinuteRow));
 		
 		
-		
-		return null;
+		return berlinClock;
 	}
 
 

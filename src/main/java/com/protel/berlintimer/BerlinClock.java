@@ -40,6 +40,12 @@ public class BerlinClock {
 		this.singleMinutesRow = singleMinutesRow;
 	}
 	
+	@Override
+	public String toString() {
+		return "BerlinClock [second=" + second + ", fiveHoursRow=" + fiveHoursRow + ", oneFullHourRow=" + oneFullHourRow
+				+ ", fiveMinutesRow=" + fiveMinutesRow + ", singleMinutesRow=" + singleMinutesRow + "]";
+	}
+	
 	
 
 }
