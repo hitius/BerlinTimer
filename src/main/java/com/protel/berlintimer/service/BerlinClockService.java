@@ -103,7 +103,7 @@ public class BerlinClockService {
 		try {
 			timeAsDate = simpleDateFormat.parse(time);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Wrong format " + e);
 		}
 		return timeAsDate;
 	}
