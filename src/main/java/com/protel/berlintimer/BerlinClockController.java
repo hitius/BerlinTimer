@@ -1,5 +1,10 @@
 package com.protel.berlintimer;
 
+import java.time.Clock;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,4 +34,14 @@ public class BerlinClockController {
 		return berlinClockService.calculationsForBerlinClock(time);
 	}    
     
+	
+	@GET
+	@Path("/realBerlinClock")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String realBerlinClock() {
+		
+		Clock clock = Clock.system(ZoneId.of("Europe/Berlin"));
+		ZonedDateTime now = ZonedDateTime.now(clock);
+		return DateTimeFormatter.ISO_TIME.format(now);
+	}    
 }
