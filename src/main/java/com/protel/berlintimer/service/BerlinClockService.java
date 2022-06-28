@@ -72,9 +72,6 @@ public class BerlinClockService {
 		berlinClock.setOneFullHourRow(RED.getValue().repeat(hourSingleHourRow) + OFF.getValue().repeat(4 - hourSingleHourRow));
 		//calculation minute rows
 		String minuteString = "";
-		if (minuteFiveMinutesRow == 0) {
-			minuteString = OFF.getValue().repeat(11);
-		}
 		for (int i=0;i<minuteFiveMinutesRow;i++) {
 			
 			if (i == 2 || i == 5 || i== 8) {
