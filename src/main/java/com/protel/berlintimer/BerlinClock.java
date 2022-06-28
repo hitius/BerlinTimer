@@ -1,5 +1,7 @@
 package com.protel.berlintimer;
 
+import static com.protel.berlintimer.enums.BerlinClockLightEnum.EMPTY_STRING;
+
 public class BerlinClock {
 	
 	// http://www.3quarks.com/en/BerlinClock/
@@ -42,8 +44,11 @@ public class BerlinClock {
 	
 	@Override
 	public String toString() {
-		return "BerlinClock [second=" + second + ", fiveHoursRow=" + fiveHoursRow + ", oneFullHourRow=" + oneFullHourRow
-				+ ", fiveMinutesRow=" + fiveMinutesRow + ", singleMinutesRow=" + singleMinutesRow + "]";
+		return EMPTY_STRING.getValue().repeat(5) + this.second + "\n"
+				+ EMPTY_STRING.getValue().repeat(3) + this.fiveHoursRow + "\n"
+				+ EMPTY_STRING.getValue().repeat(3) + this.oneFullHourRow + "\n"
+				+ this.fiveMinutesRow + "\n"
+				+ EMPTY_STRING.getValue().repeat(3) + this.singleMinutesRow;
 	}
 	
 	

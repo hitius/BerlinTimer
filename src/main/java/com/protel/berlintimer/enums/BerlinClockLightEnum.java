@@ -2,7 +2,7 @@ package com.protel.berlintimer.enums;
 
 public enum BerlinClockLightEnum {
 
-	YELLOW("Y"), OFF("O"), RED("R");
+	YELLOW("Y"), OFF("O"), RED("R"), EMPTY_STRING(" ");
 
 	private String value;
 	
