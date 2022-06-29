@@ -7,6 +7,7 @@ This is a simple API for BerlinClock Algorithm
 Base API URL: http://localhost:8080/api/
 
 	(GET) berlinClock: You can get BerlinClock formated data. If you want to get server time as BerlinClock formatted only call the service. 
+			   R: Red, Y: Yellow, O: Off. Ref: http://www.3quarks.com/en/BerlinClock/ 
 		queryParam = time(HH:mm:ss, optional)
 		
 		Example 1:
