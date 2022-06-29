@@ -66,7 +66,7 @@ public class BerlinClockService {
 		int minuteSingleMinuteRow = minute % 5;
 		
 		// calculation second
-		berlinClock.setSecond((second % 2 == 0) ? YELLOW.getValue() : OFF.getValue()); 
+		berlinClock.setSecond((second % 2 == 1) ? YELLOW.getValue() : OFF.getValue()); 
 		// calculation hour rows
 		berlinClock.setFiveHoursRow(RED.getValue().repeat(hourFiveHoursRow) + OFF.getValue().repeat(4 - hourFiveHoursRow));
 		berlinClock.setOneFullHourRow(RED.getValue().repeat(hourSingleHourRow) + OFF.getValue().repeat(4 - hourSingleHourRow));
